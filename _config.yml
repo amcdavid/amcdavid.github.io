@@ -1,7 +1,7 @@
 # Jekyll configuration
 
-name: My blog
-description: A jekyll theme
+name: Andrew McDavid
+description: Equivalent Measures.
 
 # url is currently only used only for the RSS feed in feed.xml
 url: http://scotte.github.io
@@ -13,7 +13,7 @@ url: http://scotte.github.io
 baseurl: /jekyll-clean
 
 # This can be '' to hide the Github nav button
-github: 'scotte/jekyll-clean'
+github: 'amcdavid'
 
 # Set this to your UA-# value, or '' to disable the block completely
 gaaccount: ''
@@ -22,7 +22,7 @@ gaaccount: ''
 # setting below must also be true. Individual posts can override 'comments' to
 # disable on a post-by-post basis
 disqus: ''
-comments: true
+comments: false
 
 permalink: /:year/:month/:title
 paginate: 3

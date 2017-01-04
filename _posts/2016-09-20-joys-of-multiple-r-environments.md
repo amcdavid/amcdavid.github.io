@@ -23,3 +23,10 @@ Details currently under investigation.
 5. It's possible that using [packrat](https://cran.r-project.org/package=packrat) might obviate the custom `.libPaths()` situation, but not the multiple versions of R situation.
 But I haven't had great luck with packrat (probably my own fault).
 
+## 2017.01.04 Addendum
+Working multiple R versions via [ESS/TRAMP](https://www.gnu.org/software/emacs/manual/html_node/tramp/index.html#Top) requires even more bizarre incantations.
+Supposedly, ESS is supposed to discover R versions searching the EMACS variable `exec-path` for commands starting with strings provided in the list `ess-r-versions`, though even this doesn't seem to work on MacOS.
+It definitely doesn't simply work with TRAMP, which sets its own remote PATH based on the variable `tramp-remote-path`.
+This, in turn, takes default values that generally don't reflect the PATH you'd get with a standard login shell on the remote system.
+Instead, to find a version of R, you may alter `tramp-remote-path` to put the directory containing your desired version first in the path list, eg, with `M-x customize-variables tramp-remote-path`.
+

@@ -1,4 +1,4 @@
-# Some further commentary on proper hygene of the R library search path (especially w/r/t MacOS)
+# Some further commentary on proper hygiene of the R library search path (especially w/r/t MacOS)
 
 ## TL;DR
 Only put stable, universal packages in the default R system library (`/Library/Frameworks/R.framework/Resources/library`).  Write protect it to enforce this policy.

@@ -1,0 +1,10 @@
+# Compiling R from source on a Mac
+
+I recently needed to run R devel on a Mac and couldn't get the [precompiled binaries](http://mac.r-project.org/) to work (ggplot2 would segfault when I tried to install it -- probably a compiler issue).  In any case, R is pretty quick to compile from source (at least in terms of wall clock), though there ended up being quite a few Mac-specific issues to tackle.
+
+1.  Install clang8 or greater, [eg here](https://cran.r-project.org/bin/macosx/tools/) or perhaps with homebrew.
+2.  `export SDKROOT="$(xcrun --sdk macosx --show-sdk-path)"` so clang can find headers that Apple puts in a weird place.  Consider adding this to .bash_profile, and  potentially .Renviron (I need to logout and back in to test if this is necessary).  This was the weirdest and hardest to solve problem.
+3.  Download R sources, unpack.
+4.  Edit `config.site` following instructions [in the R installation and Administration guide](https://cran.r-project.org/doc/manuals/r-release/R-admin.html#Recommended-C_002fC_002b_002b-compilers), especially those about setting variables `CC`, `CXX` and `R_LD_LIBRARY_PATH` to point to where your upgraded version of clang lives.  Somehow, after installation, R will magically know to continue to use these compilation variables for all libraries that are installed!
+5. Run `./configure` setting at least `--enable-memory-profiling --enable-R-framework --x-libraries=/opt/X11/lib` if you want to be able to run RStudio against your compiled R. I also set `--with-blas="-framework Accelerate"`, and you could try to set `--enable-lto` if you have clang10 (?) or higher for a potential speed-up.
+6. `make; make install` if you set `--enable-R-framework`.  You will probably need sudo for `make install`, and might need to set `SDKROOT` again if you get complaints about missing headers.  If you didn't `--enable-R-framework`, then consider `make install rhome=/usr/local/lib/R-4.0.0-devel` since setting rhome to be something non-default will let multiple versions coexist.
